@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Kitchen Manager Pro{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <h1>Dashboard</h1>
+    
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <i class="fas fa-book-open card-icon"></i>
+            <h3>Active Recipes</h3>
+            <p class="card-number">{{ recipe_count }}</p>
+            <a href="{{ url_for('main.recipes') }}" class="card-link">View Recipes</a>
+        </div>
+
+        <div class="dashboard-card">
+            <i class="fas fa-box card-icon"></i>
+            <h3>Inventory Items</h3>
+            <p class="card-number">{{ inventory_count }}</p>
+            <a href="{{ url_for('main.inventory') }}" class="card-link">Manage Inventory</a>
+        </div>
+
+        <div class="dashboard-card">
+            <i class="fas fa-utensils card-icon"></i>
+            <h3>Menu Items</h3>
+            <p class="card-number">{{ menu_count }}</p>
+            <a href="{{ url_for('main.menu') }}" class="card-link">View Menu</a>
+        </div>
+
+        <div class="dashboard-card">
+            <i class="fas fa-chart-line card-icon"></i>
+            <h3>Daily Sales</h3>
+            <p class="card-number">${{ daily_sales }}</p>
+            <a href="{{ url_for('main.reports') }}" class="card-link">View Reports</a>
+        </div>
+    </div>
+
+    <div class="dashboard-alerts">
+        <h2>Recent Alerts</h2>
+        <div class="alerts-list">
+            {% for alert in alerts %}
+            <div class="alert alert-{{ alert.type }}">
+                <i class="fas fa-{{ alert.icon }}"></i>
+                <span>{{ alert.message }}</span>
+                <span class="alert-time">{{ alert.time }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

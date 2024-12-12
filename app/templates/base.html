@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kitchen Manager Pro{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="page-transition">
+    <nav class="navbar {% if request.endpoint == 'main.index' %}navbar-transparent{% endif %}">
+        <div class="logo">
+            <i class="fas fa-utensils bounce"></i>
+            Kitchen Manager Pro
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('main.index') }}">Home</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('recipe.index') }}">Recipes</a></li>
+                <li><a href="{{ url_for('inventory.index') }}">Inventory</a></li>
+                <li><a href="{{ url_for('menu.index') }}">Menu</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}" class="btn-primary">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message {{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fas fa-utensils"></i> Kitchen Manager Pro</h3>
+                <p>Making kitchen management deliciously simple</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('main.features') }}">Features</a></li>
+                    <li><a href="{{ url_for('main.pricing') }}">Pricing</a></li>
+                    <li><a href="{{ url_for('main.contact') }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-clock"></i> Business Hours</h3>
+                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                <p>Weekend: 10:00 AM - 4:00 PM</p>
+            </div>
+            <div class="footer-section">
+                <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                <p>Email: support@kitchenmanager.pro</p>
+                <p>Phone: (555) 123-4567</p>
+                <p>Address: 123 Culinary Street, Foodie City, FC 12345</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Kitchen Manager Pro. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="{{ url_for('main.privacy') }}">Privacy Policy</a>
+                <a href="{{ url_for('main.terms') }}">Terms of Service</a>
+                <a href="{{ url_for('main.sitemap') }}">Sitemap</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/animations.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

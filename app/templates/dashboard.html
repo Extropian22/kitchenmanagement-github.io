@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Welcome, {{ current_user.username }}!</h1>
+    
+    <div class="stats-grid">
+        <div class="stat-card">
+            <i class="fas fa-book"></i>
+            <h3>Recipes</h3>
+            <p class="stat-number">{{ recipe_count }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-utensils"></i>
+            <h3>Menu Items</h3>
+            <p class="stat-number">{{ menu_count }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-box"></i>
+            <h3>Inventory Items</h3>
+            <p class="stat-number">{{ inventory_count }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-exclamation-triangle"></i>
+            <h3>Low Stock Alerts</h3>
+            <p class="stat-number">{{ low_stock_count }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>Daily Sales</h3>
+            <p class="stat-number">{{ daily_sales }}</p>
+        </div>
+        
+        <div class="stat-card">
+            <i class="fas fa-dollar-sign"></i>
+            <h3>Weekly Revenue</h3>
+            <p class="stat-number">${{ "%.2f"|format(weekly_revenue) }}</p>
+        </div>
+    </div>
+    
+    <div class="quick-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-grid">
+            <a href="{{ url_for('recipe.index') }}" class="action-card">
+                <i class="fas fa-plus"></i>
+                <span>New Recipe</span>
+            </a>
+            <a href="{{ url_for('inventory.index') }}" class="action-card">
+                <i class="fas fa-clipboard-list"></i>
+                <span>Update Inventory</span>
+            </a>
+            <a href="{{ url_for('menu.index') }}" class="action-card">
+                <i class="fas fa-edit"></i>
+                <span>Edit Menu</span>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to Kitchen Manager Pro{% endblock %}
+
+{% block content %}
+<section class="hero-section">
+    <div class="hero-content">
+        <h1 class="animate-on-scroll" data-animation="fade-in">Kitchen Manager Pro</h1>
+        <p class="hero-subtitle animate-on-scroll" data-animation="slide-up">Revolutionize your restaurant management with our comprehensive kitchen management solution.</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-large btn-primary animate-on-scroll" data-animation="fade-in">Get Started</a>
+            <a href="{{ url_for('main.features') }}" class="btn btn-large btn-secondary animate-on-scroll" data-animation="fade-in">Learn More</a>
+        </div>
+    </div>
+    <div class="hero-image animate-on-scroll" data-animation="slide-up">
+        <img src="{{ url_for('static', filename='images/hero-kitchen.jpg') }}" alt="Professional Kitchen">
+    </div>
+</section>
+
+<section class="features-section">
+    <h2 class="section-title animate-on-scroll" data-animation="fade-in">Why Choose Kitchen Manager Pro?</h2>
+    <div class="features-grid">
+        <div class="feature-card animate-on-scroll" data-animation="slide-up">
+            <div class="card-icon">
+                <i class="fas fa-calculator"></i>
+            </div>
+            <h3>Recipe Costing</h3>
+            <p>Accurately calculate and track recipe costs to optimize your menu pricing and profitability.</p>
+        </div>
+        <div class="feature-card animate-on-scroll" data-animation="slide-up">
+            <div class="card-icon">
+                <i class="fas fa-boxes"></i>
+            </div>
+            <h3>Inventory Management</h3>
+            <p>Real-time inventory tracking with automated alerts for low stock and reordering.</p>
+        </div>
+        <div class="feature-card animate-on-scroll" data-animation="slide-up">
+            <div class="card-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <h3>Menu Engineering</h3>
+            <p>Analyze menu performance and optimize your offerings for maximum profitability.</p>
+        </div>
+        <div class="feature-card animate-on-scroll" data-animation="slide-up">
+            <div class="card-icon">
+                <i class="fas fa-tasks"></i>
+            </div>
+            <h3>Task Management</h3>
+            <p>Streamline kitchen operations with digital checklists and task assignments.</p>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="stats-container">
+        <div class="stat-item animate-on-scroll" data-animation="fade-in">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Restaurants Served</div>
+        </div>
+        <div class="stat-item animate-on-scroll" data-animation="fade-in">
+            <div class="stat-number">25%</div>
+            <div class="stat-label">Average Cost Reduction</div>
+        </div>
+        <div class="stat-item animate-on-scroll" data-animation="fade-in">
+            <div class="stat-number">98%</div>
+            <div class="stat-label">Customer Satisfaction</div>
+        </div>
+        <div class="stat-item animate-on-scroll" data-animation="fade-in">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Support Available</div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials-section">
+    <h2 class="section-title animate-on-scroll" data-animation="fade-in">What Our Customers Say</h2>
+    <div class="testimonials-grid">
+        <div class="testimonial-card animate-on-scroll" data-animation="slide-up">
+            <div class="testimonial-content">
+                <i class="fas fa-quote-left"></i>
+                <p>"Kitchen Manager Pro has transformed our restaurant operations. We've reduced food waste by 30% and increased our profit margins significantly."</p>
+            </div>
+            <div class="testimonial-author">
+                <img src="{{ url_for('static', filename='images/chef-1.jpg') }}" alt="Chef John">
+                <div class="author-info">
+                    <h4>Chef John Smith</h4>
+                    <p>Executive Chef, The Golden Spoon</p>
+                </div>
+            </div>
+        </div>
+        <div class="testimonial-card animate-on-scroll" data-animation="slide-up">
+            <div class="testimonial-content">
+                <i class="fas fa-quote-left"></i>
+                <p>"The inventory management system is a game-changer. We always know exactly what we need and when we need it."</p>
+            </div>
+            <div class="testimonial-author">
+                <img src="{{ url_for('static', filename='images/chef-2.jpg') }}" alt="Chef Maria">
+                <div class="author-info">
+                    <h4>Chef Maria Rodriguez</h4>
+                    <p>Owner, Taste of Heaven</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-section">
+    <div class="cta-content">
+        <h2 class="animate-on-scroll" data-animation="fade-in">Ready to Transform Your Kitchen?</h2>
+        <p class="animate-on-scroll" data-animation="fade-in">Join hundreds of successful restaurants already using Kitchen Manager Pro</p>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-large btn-secondary animate-on-scroll" data-animation="fade-in">Start Your Free Trial</a>
+    </div>
+</section>
+
+<section class="partners-section">
+    <h2 class="section-title animate-on-scroll" data-animation="fade-in">Trusted By Leading Restaurants</h2>
+    <div class="partners-grid">
+        <img src="{{ url_for('static', filename='images/partner-1.png') }}" alt="Partner 1" class="animate-on-scroll" data-animation="fade-in">
+        <img src="{{ url_for('static', filename='images/partner-2.png') }}" alt="Partner 2" class="animate-on-scroll" data-animation="fade-in">
+        <img src="{{ url_for('static', filename='images/partner-3.png') }}" alt="Partner 3" class="animate-on-scroll" data-animation="fade-in">
+        <img src="{{ url_for('static', filename='images/partner-4.png') }}" alt="Partner 4" class="animate-on-scroll" data-animation="fade-in">
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Animate stats when they come into view
+    const stats = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-number');
+            }
+        });
+    });
+
+    stats.forEach(stat => observer.observe(stat));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+{% endblock %}
